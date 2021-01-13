@@ -10,7 +10,7 @@
 <body>
 
   <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop
+    <video class="flex" width="765" height="430" src="/video/movie.mp4" loop
       controls></video>
     <div class="speed">
       <div class="speed-bar">1×</div>
@@ -24,19 +24,24 @@
     const video = document.querySelector('.flex');
 
     function makeSpeed(position) {
-      const speedNum = position.offsetY / 72;
+      const minPos = 1;
+      const maxPos = 409;
+      const maxSpeed = 3;
+      const speedX1 = (maxPos - minPos)/(maxSpeed);
+      
+      const speedNum = position.offsetY / speedX1;
       video.playbackRate = speedNum;
       const percent = Math.floor(position.offsetY * 100 / 405) + '%';
       bar.style.height = percent;
       bar.textContent = speedNum.toFixed(2) + 'x';
     }
 
-    let mousedown = false;
+    let isMouseDown = false;
 
     speed.addEventListener('click', makeSpeed);
-    speed.addEventListener('mousemove', (position) => mousedown && makeSpeed(position));
-    speed.addEventListener('mousedown', () => mousedown = true);
-    speed.addEventListener('mouseup', () => mousedown = false);
+    speed.addEventListener('mousemove', (position) => isMouseDown && makeSpeed(position));
+    speed.addEventListener('mousedown', () => isMouseDown = true);
+    speed.addEventListener('mouseup', () => isMouseDown = false);
 
 
   </script>
