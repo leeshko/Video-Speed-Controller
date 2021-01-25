@@ -24,14 +24,15 @@
     const video = document.querySelector('.flex');
 
     function makeSpeed(position) {
-      const minPos = 1;
-      const maxPos = 409;
+      console.log(speed.offsetHeight)
+      const minPos = 0;
+      const maxPos = speed.offsetHeight;
       const maxSpeed = 3;
       const speedX1 = (maxPos - minPos)/(maxSpeed);
       
       const speedNum = position.offsetY / speedX1;
       video.playbackRate = speedNum;
-      const percent = Math.floor(position.offsetY * 100 / 405) + '%';
+      const percent = Math.floor(position.offsetY * 100 / maxPos) + '%';
       bar.style.height = percent;
       bar.textContent = speedNum.toFixed(2) + 'x';
     }
